@@ -1,44 +1,44 @@
-import axios from "axios";
-// export const getAllStates  = async ({allStates})=>{
-//     const [allStates , setAllStates] = useState([]);
-//     try {
-//       const allStates = await axios.get("http://192.168.1.29/fs_live/api/v1/settings/business/state");
-//       setAllStates(allStates.data.data)
-//     } catch (error) {
-//       console.log('====================================');
-//       console.log(error);
-//       console.log('====================================');
-//     }
-//    };
-
-
-export const buyerCategory = [
-    {
-      opt: "--SELECT--",
-    },
-    {
-      opt: "Trader",
-    },
-    {
-      opt: "Commission Agent",
-    },
-    {
-      opt: "Co-Operative",
-    },
-    {
-      opt: "Exporter",
-    },
-    {
-      opt: "Processor",
-    },
-    {
-      opt: "Government Agency",
-    },
-    {
-        opt:"Retailor"
-    },
-    {
-        opt:"Aggregator"
-    },
-    {}
-  ];
+export const formInitialData = {
+  role: "",
+  account_type: "",
+  registerlevel: "",
+  mandi_state: "",
+  apmcname: "",
+  title: "",
+  firstname: "",
+  middlename: "",
+  lastname: "",
+  gender: "",
+  dob: "",
+  relation_type: "",
+  relation_name: "",
+  email: "",
+  mobile: "",
+  password: "",
+  password_confirmation: "",
+  address: "",
+  state: "",
+  district: "",
+  taluka: "",
+  village: "",
+  collection_center:"",
+  fpo_email:"",
+  company_reg_no:"",
+  organisation_name:"",
+  organisation_address:"",
+  organization_cni:"",
+  org_pincode:"",
+  fpo_state:"",
+  fpo_district:"",
+  fpo_city_village:"",
+  establishment_date:"",
+  bank_name:"",
+  acc_holder_name:"",
+  bank_acc_num:"",
+  confirm_bank_acc_num:"",
+  ifsc_code:"",
+  confirm_ifsc_code:"",
+  passbook_copy:"",
+  pic:"",
+  company_registration_certificate:""
+}

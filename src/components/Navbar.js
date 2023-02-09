@@ -5,11 +5,12 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div className="container">
       <a className="navbar-brand" href="http://192.168.1.31/fs_live">
-        <img
+        {/* <img
           src=""
           className="w-25"
           alt="FPO"
-        />
+        /> */}
+        <h3>FPO</h3>
       </a>
       <button
         className="navbar-toggler"

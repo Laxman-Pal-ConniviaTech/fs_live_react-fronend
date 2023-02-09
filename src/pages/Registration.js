@@ -1,38 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import "bootstrap-icons/font/bootstrap-icons.css"
+import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
+import { formInitialData } from "../components/data";
+import BasicDetails from "../components/BasicDetails";
+import FPOdetails from "../components/FPOdetails";
+import Bank from "../components/Bank";
 const Registration = () => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL
-  const [data, setData] = useState({
-    role: "",
-    account_type: "",
-    registerlevel: "",
-    mandi_state: "",
-    apmcname: "",
-    title: "",
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    gender: "",
-    dob: "",
-    relation_type: "",
-    relation_name: "",
-    email: "",
-    mobile: "",
-    password: "",
-    password_confirmation: "",
-    address: "",
-    state: "",
-    district: "",
-    taluka: "",
-    village: "",
-  });
-const [allStates , setAllStates] = useState([]);
-const [districts , setDistricts] = useState([]);
-  // const sellerCategory = [ ,  ,  ,  ,  , ] ;
-
-  // const [regCategory , setRegcategory] = useState("d-none")
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [data, setData] = useState(formInitialData);
+  const [allStates, setAllStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -42,39 +20,31 @@ const [districts , setDistricts] = useState([]);
       [name]: value,
     });
     console.log(`${name} : ${value}`);
-
   };
 
-  useEffect(()=>{
-    const getAllStates = async ()=>{
-      try {
-        const allStates = await axios.get(BASE_URL+"/api/v1/settings/business/state");
-        setAllStates(allStates.data.data)
-      } catch (error) {
-        console.log(error);
-      }
-     }
-    
-    const getDistrict = async ()=>{
-      try {
-       const state_id = allStates.map(e=>{return e.state_name});
-       const id = state_id.map(e=>{return e})
-      const districts = await axios.get(BASE_URL+"/api/v1/settings/business/district") ;
-      console.log(id);
+  useEffect(() => {
+    const getAllStates = async () => {
+      const allStates = await axios.get(
+        BASE_URL + "/v1/settings/business/state"
+      );
+      setAllStates(allStates.data.data);
+    };
+
+    const getDistrict = async () => {
+      const districts = await axios.get(
+        BASE_URL + "/v1/settings/business/district"
+      );
       setDistricts(districts.data.data);
-     } catch (error) {
-      console.log(error);
-     }
-    }
+    };
 
     getAllStates();
     getDistrict();
-  },[])
+  }, [BASE_URL]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("====================================");
-    // console.log(states());
+    console.log(data);
     console.log("====================================");
   };
 
@@ -208,8 +178,12 @@ const [districts , setDistricts] = useState([]);
                           name="mandi_state"
                         >
                           <option value="">--Select--</option>
-                          {allStates.map((e , i)=>{
-                           return <option key={i} value={e.state_name}>{e.state_name}</option>
+                          {allStates.map((e, i) => {
+                            return (
+                              <option key={i} value={e.state_name}>
+                                {e.state_name}
+                              </option>
+                            );
                           })}
                         </select>
                       </div>
@@ -227,8 +201,12 @@ const [districts , setDistricts] = useState([]);
                           name="apmcname"
                         >
                           <option value="">--Select--</option>
-                          {districts.map((e , i)=>{
-                            return <option key={i} value={e.district_name}>{e.district_name}</option>
+                          {districts.map((e, i) => {
+                            return (
+                              <option key={i} value={e.district_name}>
+                                {e.district_name}
+                              </option>
+                            );
                           })}
                         </select>
                       </div>
@@ -236,202 +214,42 @@ const [districts , setDistricts] = useState([]);
                   </div>
                   <div className="card-header fw-bold">Basic Detail</div>
                   <div className="card-body">
-                    <div className="row g-3">
-                      <div className="col-md-2">
-                        <label className="form-label">Title</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="title"
-                        >
-                          <option value="">--Select--</option>
-                          <option>Mr.</option>
-                          <option>Mrs.</option>
-                          <option>Ms.</option>
-                        </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">First Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="firstname"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-3">
-                        <label className="form-label">Middle Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="middlename"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-3">
-                        <label className="form-label">Last Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="lastname"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Gender</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="gender"
-                        >
-                          <option value="">--Select--</option>
-                          <option>Male</option>
-                          <option>Female</option>
-                          <option>Others</option>
-                        </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Date Of Birth</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="dob"
-                          onChange={handleChange}
-                          placeholder="DD/MM/YYYY"
-                        />
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Relation Type</label>
-                        <div className="input-group">
-                          <select
-                            className="form-control w-25"
-                            name="relation_type"
-                            onChange={handleChange}
-                          >
-                            <option value="">Select</option>
-                            <option>Son Of</option>
-                            <option>Father Of</option>
-                          </select>
-                          <input
-                            type="text"
-                            className="form-control w-75"
-                            name="relation_name"
-                            onChange={handleChange}
-                            placeholder="Enter Relation Name"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Email</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Mobile</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="mobile"
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">Password</label>
-                        <div className="input-group">
-                          <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            onChange={handleChange}
-                          />
-                          <button
-                            className="btn btn-sm btn-outline-secondary show-password"
-                            type="button"
-                          >
-                            <i className="bi bi-eye-slash"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">Confirm Password</label>
-                        <div className="input-group">
-                          <input
-                            type="password"
-                            className="form-control"
-                            name="password_confirmation"
-                            onChange={handleChange}
-                          />
-                          <button
-                            className="btn btn-sm btn-outline-secondary show-password"
-                            type="button"
-                          >
-                            <i className="bi bi-eye-slash"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-12">
-                        <label className="form-label">Address</label>
-                      </div>
-                      <div className="col-md-8">
-                        <label className="form-label">Address</label>
-                        <textarea
-                          className="form-control"
-                          name="address"
-                          onChange={handleChange}
-                          placeholder="Address"
-                          rows="1"
-                        ></textarea>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">State</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="state"
-                        >
-                          <option value="">State</option>
-                        </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">District</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="district"
-                        >
-                          <option value="">District</option>
-                        </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Taluka</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="taluka"
-                        >
-                          <option value="">taluka</option>
-                        </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label className="form-label">Village</label>
-                        <select
-                          onChange={handleChange}
-                          className="form-control"
-                          name="village"
-                        >
-                          <option value="">Village</option>
-                        </select>
-                      </div>
-                    </div>
+                    <BasicDetails onChange={handleChange} />
                   </div>
-                  <div className="card-header fw-bold">
+                  <div className={`card-header fw-bold ${
+                          data.account_type === "Farmer Producer Company (FPC)" ? "d-block"
+                            : "d-none"
+                        }`}>
                     FPO Organization Details
                   </div>
-                  <div className="card-body"></div>
+                  <div className={`card-body ${
+                          data.account_type === "Farmer Producer Company (FPC)" ? "d-block"
+                            : "d-none"
+                        }`}>
+                    <FPOdetails onChange={handleChange} />
+                  </div>
+                  <div className="card-header fw-bold">
+                    Bank Details
+                  </div>
+                  <div className="card-body">
+                    <Bank onChange={handleChange} />
+                  </div>
+                  <div className={`card-body ${
+                          data.account_type === "Farmer Producer Company (FPC)" ? "d-block"
+                            : "d-none"
+                        }`}>
+                    <div className="col-md-6">
+                      <label className="form-label">
+                      Upload Company Registration Certificate
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        name="company_registration_certificate"
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
                   <button type="submit" className="btn btn-info">
                     Info
                   </button>
