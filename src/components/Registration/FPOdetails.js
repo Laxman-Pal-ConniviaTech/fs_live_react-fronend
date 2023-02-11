@@ -100,7 +100,7 @@ const FPOdetails = (props) => {
         <input
           type="text"
           className="form-control"
-          name="organization_cni"
+          name="organization_cin"
           onChange={props.onChange}
         />
       </div>

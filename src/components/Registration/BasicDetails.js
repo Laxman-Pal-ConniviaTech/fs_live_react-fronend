@@ -21,6 +21,7 @@ const BasicDetails = (props) => {
     };
 
     const getDistrict = async () => {
+
       const districts = await axios.get(
         BASE_URL + "/v1/settings/business/district"
       );
@@ -131,7 +132,7 @@ const BasicDetails = (props) => {
           type="email"
           className="form-control"
           name="email"
-          onChange={props.onChange}
+          onChange={props.handleUser}
         />
       </div>
       <div className="col-md-4">
@@ -140,7 +141,7 @@ const BasicDetails = (props) => {
           type="text"
           className="form-control"
           name="mobile"
-          onChange={props.onChange}
+          onChange={props.handleUser}
         />
       </div>
       <div className="col-md-6">
@@ -150,7 +151,7 @@ const BasicDetails = (props) => {
             type={passVisi ? "text" : "password"}
             className="form-control"
             name="password"
-            onChange={props.onChange}
+            onChange={props.handleUser}
           />
           <button
             className="btn btn-sm btn-outline-secondary show-password"
@@ -168,7 +169,7 @@ const BasicDetails = (props) => {
             type={cpassVisi ? "text" : "password"}
             className="form-control"
             name="password_confirmation"
-            onChange={props.onChange}
+            onChange={props.handleUser}
            
           />
           <button
